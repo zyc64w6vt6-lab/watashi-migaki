@@ -1,0 +1,12 @@
+{
+  "name": "わたし磨きノート",
+  "short_name": "わたし磨き",
+  "description": "食事・生活習慣・気持ちをやさしく記録するウェルネスノート",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff6f9",
+  "theme_color": "#fff4f8",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+  "lang": "ja"
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff4f8">
+<meta name="description" content="食事・生活習慣・気持ちをやさしく記録する、わたし専用のウェルネスノート">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>わたし磨きノート</title>
+<style>
+:root{--pink:#e98eae;--pink-dark:#bd587e;--pink-pale:#fff1f6;--pink-mid:#f9d8e5;--ink:#493942;--muted:#8b7781;--line:#f0dce4;--white:#fff;--green:#6b927a;--shadow:0 8px 26px rgba(172,91,124,.09)}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#fff6f9 0,#fff 300px);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-size:15px}
+button,input,textarea,select{font:inherit}button{cursor:pointer} .app{max-width:720px;margin:auto;padding:18px 16px 92px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 2px 18px}.brand{display:flex;gap:11px;align-items:center}.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(145deg,#f8c6d9,#fff0f6);display:grid;place-items:center;font-size:25px;box-shadow:var(--shadow)}h1{font-size:21px;margin:0 0 4px;letter-spacing:.02em}.sub{color:var(--muted);font-size:12px}.date-pill{background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 10px;font-size:12px;color:var(--pink-dark)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px;background:#fceaf1;border-radius:16px;margin-bottom:16px}.tab{border:0;background:transparent;padding:11px 4px;border-radius:12px;color:#987483;font-size:13px}.tab.active{background:white;color:var(--pink-dark);font-weight:700;box-shadow:0 2px 8px #d98bab1c}
+.hero{background:linear-gradient(130deg,#f8d6e3,#fff0f5 65%,#fff);border:1px solid #f7dce7;border-radius:23px;padding:19px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"♡";position:absolute;right:15px;top:-14px;font-size:100px;color:#fff8;transform:rotate(15deg)}.eyebrow{font-size:11px;color:var(--pink-dark);font-weight:700;letter-spacing:.12em}.hero h2{font-size:21px;margin:7px 0 7px;max-width:85%;line-height:1.4}.hero p{font-size:13px;line-height:1.7;margin:0;max-width:90%;color:#785c69}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;box-shadow:var(--shadow)}.stat .label{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:25px;margin:6px 0 3px}.stat small{font-size:11px;color:var(--muted)}
+.card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}.card h3{font-size:16px;margin:0 0 5px}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 14px}.checklist{display:grid;gap:9px}.check{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:13px;background:#fff9fb;border:1px solid #f8e7ee;line-height:1.45}.check input{accent-color:var(--pink-dark);width:18px;height:18px;margin:1px 0 0;flex-shrink:0}.check span{flex:1}.check small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.progress{height:8px;background:#f8e7ee;border-radius:20px;overflow:hidden;margin:10px 0 5px}.progress>div{height:100%;background:linear-gradient(90deg,#e98eae,#f5b8ce);width:0;transition:width .2s}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.btn{border:0;border-radius:13px;background:var(--pink-dark);color:#fff;padding:12px 15px;font-weight:700}.btn.secondary{background:#fff0f5;color:var(--pink-dark);border:1px solid #f4d2df}.btn.ghost{background:#fff;color:var(--pink-dark);border:1px solid var(--line)}.btn.full{width:100%;margin-top:10px}.field{display:grid;gap:7px;margin:12px 0}.field label,.label{font-size:13px;font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fffafb;color:var(--ink);outline-color:var(--pink)}textarea{resize:vertical;min-height:88px}.choices{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.choice{border:1px solid var(--line);background:#fff;border-radius:99px;padding:9px 12px;color:#806976;font-size:12px}.choice.selected{background:#ffe8f0;border-color:#eaa0bb;color:#a5486d;font-weight:700}
+.notice{background:#fff8e9;border:1px solid #f3e3bc;color:#7a6644;padding:12px;border-radius:13px;font-size:12px;line-height:1.65;margin-top:12px}.gentle{background:#f4faf5;border:1px solid #dbeee0;color:#4f7459;padding:13px;border-radius:13px;font-size:13px;line-height:1.65;margin-top:12px}
+.entry{border:1px solid var(--line);border-radius:15px;padding:13px;margin:10px 0;background:#fffafb}.entry h4{margin:0 0 5px;font-size:14px}.entry p{margin:5px 0;color:#76636d;font-size:12px;line-height:1.6;white-space:pre-wrap}.entry .meta{font-size:11px;color:var(--muted)}.empty{text-align:center;padding:26px 12px;color:var(--muted);font-size:13px;line-height:1.7}.hidden{display:none!important}.bottom{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:5}.bottom button{max-width:680px;width:100%}.mini{font-size:11px;color:var(--muted);line-height:1.65}.section-title{margin:20px 2px 8px;font-size:14px}.date-input{border:1px solid var(--line);border-radius:11px;padding:9px;color:var(--ink);background:#fff}
+@media(min-width:600px){.app{padding-top:26px}.stats{grid-template-columns:repeat(3,1fr)}.hero h2{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">🌷</div><div><h1>わたし磨きノート</h1><div class="sub">わたしを大切にする、小さな習慣</div></div></div><div class="date-pill" id="todayPill"></div></header>
+<nav class="tabs"><button class="tab active" data-tab="today">今日の記録</button><button class="tab" data-tab="history">日別履歴</button><button class="tab" data-tab="progress">進捗</button></nav>
+<main>
+<section id="todayView">
+<div class="hero"><div class="eyebrow">MY WELLNESS JOURNAL</div><h2>きれいは、わたしを大切にすることから。</h2><p>体重を急いで変えるより、食事と気持ちを整える日を少しずつ。完璧じゃなくて大丈夫♡</p></div>
+<div class="stats">
+<div class="stat"><div class="label">今日のチェック</div><strong id="doneCount">0/7</strong><small>できたことを数えよう</small><div class="progress"><div id="dailyBar"></div></div></div>
+<div class="stat"><div class="label">記録した日</div><strong id="streakCount">0日</strong><small>連続記録でなくてOK</small></div>
+<div class="stat"><div class="label">今週の記録</div><strong id="weekCount">0日</strong><small>自分を知るための記録</small></div>
+</div>
+<div class="card"><h3>♡ 食事のリズム</h3><p class="hint">食事を抜いて帳尻を合わせないことが、今回の大事なルール。</p><div class="checklist" id="mealChecks">
+<label class="check"><input type="checkbox" data-check="breakfast"><span>朝食をとった<small>炭水化物・たんぱく質など、食べたいものを組み合わせて</small></span></label>
+<label class="check"><input type="checkbox" data-check="lunch"><span>昼食をとった<small>主食とおかずをそろえることを意識</small></span></label>
+<label class="check"><input type="checkbox" data-check="dinner"><span>夕食をとった<small>サラダだけで済ませず、主食も含めて</small></span></label>
+</div></div>
+<div class="card"><h3>♡ 生活習慣</h3><p class="hint">体調に合わせて選ぼう。全部できなくても大丈夫。</p><div class="checklist">
+<label class="check"><input type="checkbox" data-check="water"><span>水分をこまめにとった</span></label>
+<label class="check"><input type="checkbox" data-check="movement"><span>通学・テニスなど、無理のない活動をした</span></label>
+<label class="check"><input type="checkbox" data-check="rest"><span>休息や気分転換の時間をとった</span></label>
+<label class="check"><input type="checkbox" data-check="kindness"><span>食べた自分を責めずに過ごせた</span></label>
+</div><div class="gentle">目標は「食べないこと」ではなく、安心して食べて、いつもの生活に戻れること。</div></div>
+<div class="card"><h3>♡ 食べたい気持ちの記録</h3><p class="hint">満腹でも食べたくなることを、意志の弱さと決めつけず観察しよう。</p>
+<div class="field"><label for="urge">今日の食べることとの関係</label><select id="urge"><option value="">選択してください</option><option>特に困らなかった</option><option>満腹でも食べたい気持ちがあった</option><option>食べ始めると止めにくかった</option><option>食べることが怖く、制限したくなった</option><option>よくわからなかった</option></select></div>
+<div class="field"><label>きっかけ（複数選択OK）</label><div class="choices" id="triggerChoices"><button type="button" class="choice">空腹・食事が足りなかったかも</button><button type="button" class="choice">ストレス・不安</button><button type="button" class="choice">退屈・習慣</button><button type="button" class="choice">疲れ・寝不足</button><button type="button" class="choice">好きなものを楽しみたい</button><button type="button" class="choice">わからない</button></div></div>
+<div class="field"><label for="feeling">そのときの気持ち</label><textarea id="feeling" placeholder="例：疲れていた。なんとなく食べたかった。理由はよくわからない。"></textarea></div>
+<div class="field"><label for="response">その後の自分への対応</label><select id="response"><option value="">選択してください</option><option>いつもの食事を続けた</option><option>自分を責めてしまった</option><option>食事を抜く・運動で埋め合わせたくなった</option><option>誰かに相談した</option><option>まだ振り返っていない</option></select></div>
+<div class="notice">もし食べすぎても、次の食事を抜かない・運動を増やして埋め合わせない。食べることを止めにくい状態がほぼ毎日続くなら、医師や摂食障害に詳しい専門家に相談してね。</div>
+</div>
+<div class="card"><h3>♡ 今日のひとこと</h3><p class="hint">反省文ではなく、自分を理解するためのメモ。</p><div class="field"><textarea id="notes" placeholder="今日気づいたこと、うれしかったこと、明日自分にしてあげたいこと…"></textarea></div>
+<div class="row"><button class="btn secondary" id="clearBtn" type="button">今日の入力をリセット</button><button class="btn" id="saveBtn" type="button">今日の記録を保存 ♡</button></div><p class="mini" id="saveStatus" aria-live="polite"></p></div>
+<div class="mini">このアプリは記録・セルフケア用で、医療的な診断や治療の代わりではありません。体重やカロリーを評価軸にせず、食事を抜く・過度な運動で埋め合わせる機能は設けていません。</div>
+</section>
+<section id="historyView" class="hidden"><div class="hero"><div class="eyebrow">YOUR JOURNEY</div><h2>昨日の自分も、今日の自分も。</h2><p>できた・できなかったを裁くのではなく、パターンを知るために見返そう。</p></div><div class="card"><div class="row"><h3>記録一覧</h3><button class="btn ghost" id="exportBtn" type="button">データを書き出す</button></div><p class="hint">記録はこの端末のブラウザ内に保存されます。</p><div id="historyList"></div></div><div class="card"><h3>記録した日を選ぶ</h3><div class="field"><label for="historyDate">日付</label><input class="date-input" id="historyDate" type="date"></div><button class="btn secondary full" id="loadDateBtn" type="button">この日の記録を開く</button></div></section>
+<section id="progressView" class="hidden"><div class="hero"><div class="eyebrow">GENTLE PROGRESS</div><h2>数字より、続けてきたこと。</h2><p>進歩は体重だけでは測れない。食事のリズムや、自分への接し方も大切な変化だよ。</p></div><div class="stats"><div class="stat"><div class="label">保存した記録</div><strong id="totalDays">0日</strong><small>これまでの合計</small></div><div class="stat"><div class="label">食事の記録</div><strong id="mealRate">—</strong><small>保存記録での平均</small></div></div><div class="card"><h3>過去7日間の記録</h3><p class="hint">チェック数は目安。満点を取ることが目的ではないよ。</p><div id="weekBars"></div></div><div class="card"><h3>自分への約束</h3><div class="checklist"><div class="check"><span>♡ 過食した翌日も食事を抜かない</span></div><div class="check"><span>♡ 食べた分を運動で埋め合わせない</span></div><div class="check"><span>♡ お腹や気持ちのサインを責めずに観察する</span></div><div class="check"><span>♡ つらさが続くときは、ひとりで抱えず相談する</span></div></div></div><button class="btn secondary full" id="deleteAllBtn" type="button">すべての記録を削除</button></section>
+</main>
+</div>
+<div class="bottom"><button class="btn" id="bottomSave" type="button">今日の記録を保存 ♡</button></div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KEY='watashiMigakiRecords_v1';
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+let currentDate=today(), triggers=[];
+let records=loadRecords();
+function loadRecords(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(records))}
+function currentData(){return {checks:Object.fromEntries($$('[data-check]').map(el=>[el.dataset.check,el.checked])),urge:$('#urge').value,triggers:[...triggers],feeling:$('#feeling').value,response:$('#response').value,notes:$('#notes').value,updatedAt:new Date().toISOString()}}
+function applyData(d={}){$$('[data-check]').forEach(el=>el.checked=!!(d.checks||{})[el.dataset.check]);$('#urge').value=d.urge||'';triggers=d.triggers||[];$('#feeling').value=d.feeling||'';$('#response').value=d.response||'';$('#notes').value=d.notes||'';$$('#triggerChoices .choice').forEach(b=>b.classList.toggle('selected',triggers.includes(b.textContent.trim())));updateStats()}
+function save(){records[currentDate]=currentData();persist();$('#saveStatus').textContent=`${currentDate} の記録をこの端末に保存したよ ♡`;renderHistory();renderProgress();updateStats()}
+function updateStats(){const checks=$$('[data-check]');const n=checks.filter(e=>e.checked).length;$('#doneCount').textContent=`${n}/7` ;$('#dailyBar').style.width=(n/7*100)+'%';const dates=Object.keys(records).sort();$('#streakCount').textContent=dates.length+'日';const weekStart=new Date();weekStart.setDate(weekStart.getDate()-6);const week=dates.filter(x=>new Date(x+'T12:00:00')>=weekStart&&x<=today());$('#weekCount').textContent=week.length+'日'}
+function switchTab(tab){$$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));['today','history','progress'].forEach(t=>$('#'+t+'View').classList.toggle('hidden',t!==tab));$('.bottom').classList.toggle('hidden',tab!=='today');if(tab==='history')renderHistory();if(tab==='progress')renderProgress()}
+$$('.tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+$$('#triggerChoices .choice').forEach(b=>b.addEventListener('click',()=>{const t=b.textContent.trim();triggers=triggers.includes(t)?triggers.filter(x=>x!==t):[...triggers,t];b.classList.toggle('selected',triggers.includes(t))}));
+$('#saveBtn').addEventListener('click',save);$('#bottomSave').addEventListener('click',save);
+$('#clearBtn').addEventListener('click',()=>{if(confirm('入力中の内容をリセットする？ 保存済みの記録は削除されないよ。')){applyData({});$('#saveStatus').textContent='入力をリセットしたよ。必要なら保存してね。'}});
+function renderHistory(){const list=$('#historyList');const dates=Object.keys(records).sort().reverse();if(!dates.length){list.innerHTML='<div class="empty">まだ記録がないよ。<br>今日の気持ちや食事から、ひとつずつ始めよう ♡</div>';return}
+list.innerHTML=dates.map(date=>{const d=records[date],count=Object.values(d.checks||{}).filter(Boolean).length;const summary=[d.urge,d.triggers&&d.triggers.join('・'),d.response].filter(Boolean).join(' ／ ');return `<article class="entry"><div class="row"><h4>${date}</h4><span class="meta">習慣 ${count}/7</span></div><p>${esc(summary||'食事・気持ちの記録')}</p>${d.notes?`<p>${esc(d.notes)}</p>`:''}<button class="btn ghost" data-open="${date}" type="button">この記録を編集</button> <button class="btn ghost" data-del="${date}" type="button">削除</button></article>`}).join('');
+$$('[data-open]').forEach(b=>b.addEventListener('click',()=>{currentDate=b.dataset.open;applyData(records[currentDate]);$('#todayPill').textContent=currentDate;switchTab('today');$('#saveStatus').textContent=`${currentDate} の記録を編集中`}));
+$$('[data-del]').forEach(b=>b.addEventListener('click',()=>{if(confirm(`${b.dataset.del} の記録を削除する？`)){delete records[b.dataset.del];persist();renderHistory();renderProgress();updateStats()}}))}
+function renderProgress(){const dates=Object.keys(records).sort();$('#totalDays').textContent=dates.length+'日';if(!dates.length){$('#mealRate').textContent='—';$('#weekBars').innerHTML='<div class="empty">記録が増えると、ここに進捗が表示されるよ。</div>';return}const mealKeys=['breakfast','lunch','dinner'];const total=dates.reduce((s,date)=>s+mealKeys.filter(k=>records[date].checks&&records[date].checks[k]).length,0);$('#mealRate').textContent=Math.round(total/(dates.length*3)*100)+'%';const dayNames=['日','月','火','水','木','金','土'];let html='';for(let i=6;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const key=`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;const d=records[key];const n=d?Object.values(d.checks||{}).filter(Boolean).length:0;html+=`<div style="display:grid;grid-template-columns:58px 1fr 38px;gap:9px;align-items:center;margin:13px 0;font-size:12px"><span>${dt.getMonth()+1}/${dt.getDate()} (${dayNames[dt.getDay()]})</span><div class="progress" style="margin:0"><div style="width:${n/7*100}%"></div></div><span style="text-align:right;color:var(--muted)">${d?n+'/7':'—'}</span></div>`}$('#weekBars').innerHTML=html}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('#exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='watashi-migaki-records.json';a.click();URL.revokeObjectURL(a.href)});
+$('#loadDateBtn').addEventListener('click',()=>{const d=$('#historyDate').value;if(!d)return alert('日付を選んでね');currentDate=d;applyData(records[d]||{});$('#todayPill').textContent=d;switchTab('today');$('#saveStatus').textContent=records[d]?'保存済みの記録を開いたよ':'この日はまだ記録がないよ'});
+$('#deleteAllBtn').addEventListener('click',()=>{if(confirm('すべての記録を完全に削除する？ この操作は取り消せないよ。')){records={};persist();renderProgress();renderHistory();updateStats();alert('すべての記録を削除したよ')}})
+$('#todayPill').textContent=currentDate;
+if(records[currentDate])applyData(records[currentDate]);else applyData({});
+renderHistory();renderProgress();updateStats();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
